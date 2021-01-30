@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<nav th:replace="fragments :: page-header"></nav>
+<body>
+<form method='post'>
+    <div>
+        <img src="./images/meal-placeholder.jpg"> <br>
+        <input name="imageUrl" type="text" class="form-control" placeholder="Past image url here">
+    </div>
+    <div>
+        <label>Dish Name:
+            <input name="name" class="form-control"/>
+        </label>
+    </div>
+    <div class="input-group mb-3">
+        <label>Ingredients:
+            <br>
+        <input id="ingredientInput" type="text" class="form-control" placeholder="Ex: 1 cup of flour" aria-label="Add Ingredient" aria-describedby="basic-addon2" name="ingredients" width="50px">
+        <input type="hidden" name="hiddenIngredients" id="hide">
+        <div class="input-group-append">
+            <button class="btn btn-outline-info" id="add" type="button">Add Ingredient</button>
+        </div>
+        </label>
+    </div> <div class="col-12">
+    <ul class="list-group" width="70px">
+    </ul>
+</div>
+
+    <div>
+        <label>
+            Preparation Instructions:
+             <br>
+            <textarea name="description" class="form-control" >
+            </textarea>
+        </label>
+    </div>
+    <div>
+        <label>Category
+            <select name="category">
+                <option th:each="category : ${categories}"
+                        th:value="${category.id}"
+                        th:text="${category.name}"
+                ></option>
+            </select>
+        </label>
+    </div>
+
+
+    <button type="submit" value="Submit">Submit</button>
+</form>
+
+
+
+
+</body>
+
+
+
+<script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+<script src="../script.js"></script>
+
+<script>
+window.addEventListener('keydown', function(e) {
+    if (e.keyIdentifier == 'U+000A' || e.keyIdentifier == 'Enter' || e.keyCode == 13) {
+        e.preventDefault();
+        return false;
+    }
+}, true);
+</script>
+
+</html>

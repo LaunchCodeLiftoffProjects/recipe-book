@@ -1,10 +1,9 @@
 package org.liftoff.recipebook.controllers;
 
-
-import org.liftoff.recipebook.models.User;
 import org.liftoff.recipebook.models.data.UserRepository;
 import org.liftoff.recipebook.models.dto.LoginFormDTO;
 import org.liftoff.recipebook.models.dto.RegisterFormDTO;
+import org.liftoff.recipebook.models.User;;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -119,8 +118,7 @@ public class AuthenticationController {
 
         setUserInSession(request.getSession(), theUser);
 
-        //change to "redirect:/profile" once profile is set up
-        return "redirect:/index";
+        return "redirect:/profile";
     }
 
     @GetMapping("/logout")

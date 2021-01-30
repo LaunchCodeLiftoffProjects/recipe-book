@@ -1,0 +1,11 @@
+
+.nav-bar {
+list-style-type: none;
+}
+
+.nav-bar li {
+float: right;
+display: inline;
+margin-right: 10px;
+}
+

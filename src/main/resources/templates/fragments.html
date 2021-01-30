@@ -1,29 +1,59 @@
 <!DOCTYPE html>
+
 <html lang="en" xmlns:th="http://www.thymeleaf.org/">
 
 <head th:fragment="head">
-
-    <!-- Bootstrap stylesheets and script -->
+    <link th:href="@{css/recipebook.css}" rel="stylesheet"/>
     <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+
+
     <script type="text/javascript" th:src="@{/js/bootstrap.js}"></script>
 
-    <title th:text="'Recipe Book'">Recipe Book</title>
+    <title th:text="'Flavor Library'">Flavor Library</title>
 </head>
 
 <body>
 
-<div th:fragment="page-header" class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <a th:href="@{/}" class="navbar-brand"></a>
-        </div>
-        <!--<div class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li><a th:href="@{/add}"></a></li>
-                --><li><a th:href="@{/logout}">logout</a></li><!--
-            </ul>
-        </div>-->
-    </div>
+<span th:fragment="page-header">
+
+    <ul class="nav-bar">
+        <li style="float:left"><a  th:href="@{/}">Home</a></li>
+        <li>
+            <form th:action="@{/search}" method="post">
+                <input type="text" name="searchTerm">
+                <button>Search</button>
+            </form>
+        </li>
+        <li><a th:href="@{/logout}">Logout</a></li>
+        <!--        <li><a th:href="@{'/profile/' + ${profile}}">My Profile</a></li>-->
+    </ul><br>
+</span>
+
+<div th:fragment="recipe-thumbnail" class="recipe-thumbnail">
+    <table border="1" cellspacing="0" width="500" height="200">
+        <td>
+            <img src="https://previews.123rf.com/images/chat9780/chat97801412/chat9780141200024/34619324-extremely-hot-and-spicy-thai-noodle-square-cropped.jpg" alt="Recipe picture not found" width="200">
+            <br>
+            <p>recipe name (this fragment will repeat for each recipe belonging to the user)</p>
+        </td>
+        <td>
+            <ul>recipe quick details</ul>
+        </td>
+    </table>
+</div>
+
+
+<div th:fragment="favorite-recipe-thumbnail" class="recipe-thumbnail">
+    <table border="1" cellspacing="0" width="500" height="200">
+        <td>
+            <img src="https://itadakimasuanime.files.wordpress.com/2015/01/ramen-the-rolling-girls-01-01.png" alt="Recipe picture not found" width="200">
+            <br>
+            <p>favorite recipe name</p>
+        </td>
+        <td>
+            <ul>favorite recipe quick details</ul>
+        </td>
+    </table>
 </div>
 
 </body>

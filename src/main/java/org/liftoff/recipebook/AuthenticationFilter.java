@@ -1,9 +1,8 @@
 package org.liftoff.recipebook;
-
-
 import org.liftoff.recipebook.controllers.AuthenticationController;
-import org.liftoff.recipebook.models.User;
 import org.liftoff.recipebook.models.data.UserRepository;
+import org.liftoff.recipebook.models.User;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
@@ -54,3 +53,4 @@ public class AuthenticationFilter extends HandlerInterceptorAdapter {
     }
 
 }
+

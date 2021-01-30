@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Profile Page</title>
+    <link th:href="@{css/recipebook.css}" rel="stylesheet"/>
+
+</head>
+<body>
+<nav th:replace="fragments :: page-header"></nav>
+
+    <center>
+    <table border="1" cellspacing="0" style="overflow-x:auto;" width="100%" height="500" align="center">
+        <tr align="center">
+            <td>
+                <img src="https://secure.gravatar.com/avatar/4256abfa50333ffadd62fd8fb70849ad" alt="Profile picture not found" width="200" height="200" style="border-radius: 50%;">
+                <br>
+
+
+
+
+
+
+
+
+
+
+
+                <br>
+                <p  th:text="${user.username}">USERNAME</p>
+            </td>
+            <td>
+                <div th:replace="fragments :: favorite-recipe-thumbnail"></div>
+            </td>
+        </tr>
+        <tr align="center">
+            <td colspan="2">
+                <br>
+                <p th:if="${user.bio}" th:text="${user.bio}">BIO</p>
+                <div th:if="${isUserInSession}">
+                    <form method="post" th:unless="${user.bio}">
+                        <div class="form-group">
+                            <label>Add Bio:
+                                <input type="text" class="bio" th:field="${user.bio}" />
+                            </label>
+                            <input type="submit" value="Submit">
+                            <p class="error" th:errors="${user.bio}"></p>
+                        </div>
+                    </form>
+                </div>
+            </td>
+        </tr>
+        <tr align="center">
+            <td colspan="2">
+                <div th:replace="fragments :: recipe-thumbnail"></div>
+                <br>
+            </td>
+        </tr>
+    </table>
+    </center>
+
+</body>
+</html>
