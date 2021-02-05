@@ -96,6 +96,8 @@ public class RecipeController {
         int userId = sessionUser.getId();
         model.addAttribute("user", user);
         model.addAttribute("profile", userRepository.findById(userId).get());
+        model.addAttribute("userRecipes", recipeRepository.getAllRecipesByUserId(userId));
+
         return "profile";
     }
 

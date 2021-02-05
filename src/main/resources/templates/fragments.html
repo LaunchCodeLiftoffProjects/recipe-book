@@ -52,7 +52,7 @@
 <div th:each="recipe : ${userRecipes}" th:fragment="recipe-thumbnail" class="recipe-thumbnail">
     <table border="1" cellspacing="0" width="500" height="200">
         <td>
-            <img th:src="${recipe.imageUrl}" width="200">
+            <img th:src="${recipe.imageUrl}" width="200"  onerror="this.onerror=null; this.src='../images/meal-placeholder.jpg'"/>
             <br>
             <p id="recipe-name" th:text="${recipe.name}">No Name To Show</p>
         </td>
@@ -60,6 +60,7 @@
             <ul>
                 <p class="recipe-details" th:text="'Category: ' + ${recipe.category.name}">No Category To Show</p>
                 <p class="recipe-details" th:text="'Prep Time: ' + ${recipe.prepTime}">No Prep Time To Show</p>
+                <a th:href="'http://localhost:8080/view/recipe?id='+${recipe.id}">View Recipe</a>
             </ul>
         </td>
     </table>

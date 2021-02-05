@@ -9,11 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.Arrays;
-import java.util.List;
 
 /**
  * Created by LaunchCode
@@ -33,17 +32,21 @@ public class ViewController {
 
 
     @RequestMapping(value = "recipe")
-    public String view(Model model, HttpServletRequest request) {
+    public String view(Model model,HttpServletRequest request,@RequestParam("id")String id) {
         HttpSession session = request.getSession();
         User sessionUser = authenticationController.getUserFromSession(session);
         int userId = sessionUser.getId();
 
+        int i = Integer.parseInt(id);
+        Recipe viewThisRecipe = recipeRepository.findById(i);
+        String[] myIngredients = viewThisRecipe.getIngredients().split("\\$\\$");
+        model.addAttribute("profile", userRepository.findById(userId).get());
         model.addAttribute("recipes", recipeRepository.findAll());
         model.addAttribute("categories", recipeCategoryRepository.findAll());
-        model.addAttribute("profile", userRepository.findById(userId).get());
-//        List<String> ingredientList = Arrays.asList(recipe.ingredients.split("$$"));
+        model.addAttribute("myIngredients",myIngredients);
+        model.addAttribute("recipe",viewThisRecipe);
 
-        return "view/{id}";
+        return "view";
     }
 
 }
