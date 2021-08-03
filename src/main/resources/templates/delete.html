@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-    <nav th:replace="fragments :: page-header"></nav>
-</head>
+
 <body class="container body-content">
+<nav th:replace="fragments :: page-header"></nav>
+
 <h1>Choose a recipe to delete:</h1>
     <form method="post">
-        <tr th:each="recipe : ${recipesToDelete} ">
-            <input type="radio"th:value="${recipe.id}" th:name="deleteThis"/>
+        <div th:each="recipe : ${recipesToDelete} ">
+            <input type="checkbox" th:value="${recipe.id}" th:name="deleteThis"/>
              <lable  th:text="${recipe.name}"/>
             <br>
-        </tr>
+        </div>
         <br>
         <button type="submit" value="Submit">Submit</button>
     </form>

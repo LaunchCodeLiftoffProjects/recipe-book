@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
+import java.util.List;
 
 
 @Controller
@@ -87,9 +87,12 @@ public class RecipeController {
     }
     
     @PostMapping("delete")
-    public String removeRecipe(@RequestParam int deleteThis, HttpServletRequest request,
+    public String removeRecipe(@RequestParam List<Integer> deleteThis, HttpServletRequest request,
                                Model model){
-        recipeRepository.deleteById(deleteThis);
+        for (int recipe: deleteThis) {
+            recipeRepository.deleteById(recipe);
+        }
+
         HttpSession session = request.getSession();
         User sessionUser = authenticationController.getUserFromSession(session);
         User user = userRepository.findById(sessionUser.getId()).get();

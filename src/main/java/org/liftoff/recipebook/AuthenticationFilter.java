@@ -4,7 +4,7 @@ import org.liftoff.recipebook.models.data.UserRepository;
 import org.liftoff.recipebook.models.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+import org.springframework.web.servlet.AsyncHandlerInterceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
-public class AuthenticationFilter extends HandlerInterceptorAdapter {
+public class AuthenticationFilter implements AsyncHandlerInterceptor {
 
     @Autowired
     UserRepository userRepository;
@@ -29,7 +29,6 @@ public class AuthenticationFilter extends HandlerInterceptorAdapter {
                 return true;
             }
         }
-
         return false;
     }
 
@@ -47,8 +46,8 @@ public class AuthenticationFilter extends HandlerInterceptorAdapter {
         if (user != null) {
             return true;
         }
-
         response.sendRedirect("/login");
+
         return false;
     }
 
