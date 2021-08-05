@@ -11,7 +11,6 @@
 </head>
 
 <body>
-
 <div th:fragment="page-header" class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
@@ -35,20 +34,6 @@
     </div>
 </div>
 
-<!--<span th:fragment="page-header">-->
-<!--    <ul class="nav-bar">-->
-<!--        <li style="float:left"><a  th:href="@{/}">Home</a></li>-->
-<!--        <li>-->
-<!--            <form th:action="@{/search}" method="post">-->
-<!--                <input type="text" name="searchTerm">-->
-<!--                <button>Search</button>-->
-<!--            </form>-->
-<!--        </li>-->
-<!--        <li><a th:href="@{/logout}">Logout</a></li>-->
-<!--        <li><a th:href="@{'/profile/' + ${profile.id}}">My Profile</a></li>-->
-<!--    </ul><br>-->
-<!--</span>-->
-
 <div th:fragment="recipe-thumbnail" class="recipe-thumbnail">
     <table border="1" cellspacing="0" width="500" height="200">
         <tr th:each="recipe:${userRecipes}" >
@@ -65,20 +50,5 @@
         </tr>
     </table>
 </div>
-
-
-<!--<div th:if="${user.favoriteRecipe}" th:fragment="favorite-recipe-thumbnail" class="recipe-thumbnail">-->
-<!--    <table border="1" cellspacing="0" width="500" height="200">-->
-<!--        <td>-->
-<!--            <img src="https://itadakimasuanime.files.wordpress.com/2015/01/ramen-the-rolling-girls-01-01.png" alt="Recipe picture not found" width="200">-->
-<!--            <br>-->
-<!--            <p>favorite recipe name</p>-->
-<!--        </td>-->
-<!--        <td>-->
-<!--            <ul>favorite recipe quick details</ul>-->
-<!--        </td>-->
-<!--    </table>-->
-<!--</div>-->
-
 </body>
 </html>

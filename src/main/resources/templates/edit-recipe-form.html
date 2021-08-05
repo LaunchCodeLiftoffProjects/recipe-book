@@ -1,72 +1,65 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="https://www.thymeleaf.org/">
 <head th:replace="fragments :: head"></head>
-<nav th:replace="fragments :: page-header"></nav>
-<body class="container body-content">
-<br>
-<form method='post' action="/saveEditedRecipe">
 
-    <div>
-        <img  th:src="${editThisRecipe.imageUrl}" width="320" height="320" onerror="this.onerror=null; this.src='./images/meal-placeholder.jpg'"> <br>
-        <input name="imageUrl" type="text" class="form-control" placeholder="Paste an image Url"/>
+<body class="container body-content">
+<nav th:replace="fragments :: page-header"></nav>
+<form method='post' action="/saveEditedRecipe">
+    <div class="form-group">
+        <img  th:src="${editThisRecipe.imageUrl}" width="320" height="320" onerror="this.onerror=null; this.src='./images/meal-placeholder.jpg'"><br>
+        <input type="text" name="imageUrl" placeholder="Add new image Url">
     </div>
-    <div>
+
+    <div class="form-group">
         <label>Dish Name:
-            <input name="name" class="form-control" th:value="${editThisRecipe.name}"/>
+            <input type="text" name="name" th:value="${editThisRecipe.name}">
         </label>
     </div>
-    <div class="input-group mb-3">
-        <label>Ingredients(uncheck box to remove):
-            <br>
+
+    <div class="form-group">
+        <label>Ingredients(uncheck box to remove):<br>
             <tr th:each="ingredient : ${currentIngredients}">
-                <input  type="checkbox" th:id="${ingredient}" name="originalIngredients" th:text="${ingredient}" th:value="${ingredient}" checked/>
+                <input  type="checkbox" th:id="${ingredient}" name="originalIngredients" th:text="${ingredient}" th:value="${ingredient}" checked>
             </tr>
-            <input id="ingredientInput" type="text" class="form-control" placeholder="Ex: 1 cup of flour" aria-label="Add Ingredient" aria-describedby="basic-addon2" name="ingredients" width="50px">
-            <input type="hidden" name="hiddenIngredients" id="hide"  />
+            <input type="text" name="ingredients" id="ingredientInput" placeholder="Ex: 1 cup of flour" aria-label="Add Ingredient" aria-describedby="basic-addon2"><br>
+            <input type="hidden" name="hiddenIngredients" id="hiddenIngredients">
             <div class="input-group-append">
                 <button class="btn btn-outline-info" id="add" type="button">Add New Ingredient</button>
             </div>
         </label>
-    </div> <div class="col-12">
-    <ul class="list-group" width="70px">
-    </ul>
-</div>
+    </div>
+<!--    <div class="col-12">-->
+<!--        <ul class="list-group" width="70px">-->
+<!--        </ul>-->
+<!--    </div>-->
 
-    <div>
-        <label>
-            Preparation Instructions:
-            <br>
-            <textarea name="description" class="form-control" th:text="${editThisRecipe.description}">
-            </textarea>
+    <div class="form-group">
+        <label>Preparation Instructions:<br>
+            <textarea name="description" rows="3" cols="25" maxlength="1000" th:text="${editThisRecipe.description}"></textarea>
         </label>
     </div>
-    <div>
-        <label>Prep Time:
-            <input name="prepTime" class="form-control" th:value="${editThisRecipe.prepTime}"/>
+
+    <div class="form-group">
+        <label>Prep Time:<br>
+            <input type="text" name="prepTime" th:value="${editThisRecipe.prepTime}">
         </label>
     </div>
-    <div>
+
+    <div class="form-group">
         <label>Category
             <select name="category">
                 <option th:each="category : ${categories}"
                         th:value="${category.id}"
-                        th:text="${category.name}"
-                ></option>
+                        th:text="${category.name}">
+                </option>
             </select>
         </label>
     </div>
-    <input type="hidden" th:value="${editThisRecipe.id}" name="oldRecipeId"/>
-    <input type="hidden" name="ingredients"/>
-
-
+    <input type="hidden" th:value="${editThisRecipe.id}" name="oldRecipeId">
+    <input type="hidden" name="ingredients">
     <button class="btn btn-primary" type="submit" value="Submit">Submit</button>
 </form>
-
-
-
-
 </body>
-
 
 
 <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
@@ -83,5 +76,4 @@ window.addEventListener('keydown', function(e) {
     }
 }, true);
 </script>
-
 </html>

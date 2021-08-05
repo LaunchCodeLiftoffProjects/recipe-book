@@ -17,22 +17,15 @@
     </div>
 
     <div class="form-group">
-        <label>Ingredients:<br>
-            <input type="text" name="ingredients" placeholder="Ex: 2 eggs (any color)" id="ingredientInput" aria-label="Add Ingredient" aria-describedby="basic-addon2">
-            <input type="hidden" name="hiddenIngredients" id="hide">
-            <div class="input-group-append">
-                <button class="btn btn-outline-info" id="add" type="button">Add Ingredient</button>
-            </div>
+        <label id="ingredientsLabel">Ingredients:<br>
+            <input type="text" name="ingredients" id="ingredientInput" placeholder="Ex: 2 eggs (any color)" aria-label="Add Ingredient" aria-describedby="basic-addon2"><br>
+            <input type="hidden" name="hiddenIngredients" id="hiddenIngredients">
+            <button class="btn btn-outline-info" id="add" type="button">Add Ingredient</button>
         </label>
-    </div>
-    <div class="col-12 form-group">
-        <ul class="list-group" id="ingredients-list">
-        </ul>
     </div>
 
     <div class="form-group">
-        <label>
-            Preparation Instructions:<br>
+        <label>Preparation Instructions:<br>
             <textarea name="description" rows="3" cols="25" maxlength="1000" placeholder="Recipe steps here"></textarea>
         </label>
     </div>
@@ -74,5 +67,4 @@ window.addEventListener('keydown', function(e) {
     }
 }, true);
 </script>
-
 </html>
