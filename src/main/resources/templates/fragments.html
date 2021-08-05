@@ -26,9 +26,9 @@
                         <button>Search</button>
                     </form>
                 </li>
-                <li><a th:href="@{/create-recipe}">Create a Recipe</a></li>
-                <li><a th:href="@{/edit-recipe}">Edit a Recipe</a></li>
-                <li><a th:href="@{/delete}">Delete a Recipe</a></li>
+                <li><a th:href="@{/recipes/create}">Create a Recipe</a></li>
+                <li><a th:href="@{/recipes/edit}">Edit a Recipe</a></li>
+                <li><a th:href="@{/recipes/delete}">Delete a Recipe</a></li>
                 <li><a th:href="@{/logout}">Logout</a></li>
             </ul><br>
         </div>
@@ -49,19 +49,20 @@
 <!--    </ul><br>-->
 <!--</span>-->
 
-<div th:each="recipe : ${userRecipes}" th:fragment="recipe-thumbnail" class="recipe-thumbnail">
+<div th:fragment="recipe-thumbnail" class="recipe-thumbnail">
     <table border="1" cellspacing="0" width="500" height="200">
-        <td>
-            <img th:src="${recipe.imageUrl}" width="200">
-            <br>
-            <p id="recipe-name" th:text="${recipe.name}">No Name To Show</p>
-        </td>
-        <td>
-            <ul>
-                <p class="recipe-details" th:text="'Category: ' + ${recipe.category.name}">No Category To Show</p>
-                <p class="recipe-details" th:text="'Prep Time: ' + ${recipe.prepTime}">No Prep Time To Show</p>
-            </ul>
-        </td>
+        <tr th:each="recipe:${userRecipes}" >
+            <td align="center">
+                <img th:src="${recipe.imageUrl}" id="recipe-image" alt="No recipe image"><br>
+                <p id="recipe-name" th:text="${recipe.name}"></p>
+            </td>
+            <td align="center">
+                <ul>
+                    <p class="recipe-details" th:text="'Category: ' + ${recipe.category.name}"></p>
+                    <p class="recipe-details" th:text="'Prep Time: ' + ${recipe.prepTime}"></p>
+                </ul>
+            </td>
+        </tr>
     </table>
 </div>
 

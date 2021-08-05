@@ -1,6 +1,6 @@
 var button = document.getElementById("add");
 var input = document.getElementById("ingredientInput");
-var ul = document.querySelectorAll("ul")[1];
+var ul = document.getElementById("ingredients-list");
 var hiddenIngredients = document.getElementById("hide");
 
 

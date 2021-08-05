@@ -11,10 +11,8 @@ public class UserData {
         String username = usernameCheck.toLowerCase();
 
         for (User user : allUsers) {
-
             if (user.getUsername().toLowerCase().contains(username)) {
                 currentUser.add(user);
-
             }
         }
         return currentUser;

@@ -6,7 +6,7 @@
 <nav th:replace="fragments :: page-header"></nav>
 <div>
     <p th:text="'Search Results for ' + ${searchTerm}"></p>
-    <th:block th:each = "user : ${results}">
+    <th:block th:each = "user:${results}">
        <ul>
            <a th:text="${user.username}" th:href="@{'/profile/' + ${user.id}}"></a>
        </ul>

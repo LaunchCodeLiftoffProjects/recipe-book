@@ -1,9 +1,8 @@
 package org.liftoff.recipebook.models;
 
-import org.springframework.context.annotation.Primary;
-
-import javax.persistence.*;
-import javax.validation.constraints.Max;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 
 @Entity
@@ -16,8 +15,8 @@ public class Recipe extends AbstractEntity{
     private String ingredients;
     private String prepTime;
 
-
     @ManyToOne
+    @NotNull
     private RecipeCategory category;
 
     private String imageUrl;

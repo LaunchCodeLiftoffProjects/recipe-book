@@ -5,15 +5,13 @@
 <body class="container body-content">
 <nav th:replace="fragments :: page-header"></nav>
 
-<h1>Choose a recipe to delete:</h1>
+<h1>Select recipes to delete:</h1>
     <form method="post">
-        <div th:each="recipe : ${recipesToDelete} ">
+        <div class="form-group" th:each="recipe:${recipesToDelete} ">
             <input type="checkbox" th:value="${recipe.id}" th:name="deleteThis"/>
-             <lable  th:text="${recipe.name}"/>
-            <br>
+            <lable th:text="${recipe.name}">No Name</lable>
         </div>
-        <br>
-        <button type="submit" value="Submit">Submit</button>
+        <button class="btn btn-primary" type="submit" value="Submit">Submit</button>
     </form>
 </body>
 </html>
