@@ -19,7 +19,7 @@
     <div class="form-group">
         <label>Ingredients(uncheck box to remove):<br>
             <tr th:each="ingredient : ${currentIngredients}">
-                <input  type="checkbox" th:id="${ingredient}" name="originalIngredients" th:text="${ingredient}" th:value="${ingredient}" checked>
+                <input  type="checkbox" th:id="${ingredient}" name="originalIngredients" th:text="${ingredient}" th:value="${ingredient}" checked><br>
             </tr>
             <input type="text" name="ingredients" id="ingredientInput" placeholder="Ex: 1 cup of flour" aria-label="Add Ingredient" aria-describedby="basic-addon2"><br>
             <input type="hidden" name="hiddenIngredients" id="hiddenIngredients">
@@ -35,7 +35,7 @@
 
     <div class="form-group">
         <label>Preparation Instructions:<br>
-            <textarea name="description" rows="3" cols="25" maxlength="1000" th:text="${editThisRecipe.description}"></textarea>
+            <textarea name="description" rows="3" cols="25" th:text="${editThisRecipe.description}"></textarea>
         </label>
     </div>
 

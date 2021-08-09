@@ -32,15 +32,20 @@ public class RecipeController {
     @Autowired
     private UserRepository userRepository;
 
-    @GetMapping("create")
-    public String displayCreateRecipeForm(Model model, HttpServletRequest request){
+    public int setUser (HttpServletRequest request) {
         HttpSession session = request.getSession();
         User sessionUser = authenticationController.getUserFromSession(session);
         int userId = sessionUser.getId();
+        return userId;
+    }
+
+    @GetMapping("create")
+    public String displayCreateRecipeForm(Model model, HttpServletRequest request){
+        int currentUserId = setUser(request);
 
         model.addAttribute("recipe",new Recipe());
         model.addAttribute("categories", recipeCategoryRepository.findAll());
-        model.addAttribute("profile", userRepository.findById(userId).get());
+        model.addAttribute("profile", userRepository.findById(currentUserId).get());
         return "recipes/create";
     }
 
@@ -48,10 +53,10 @@ public class RecipeController {
     public String processCreateRecipeForm(@RequestParam String name, @ModelAttribute Recipe recipe, @RequestParam String description,
                                @RequestParam String hiddenIngredients, @RequestParam RecipeCategory category,
                                @RequestParam String imageUrl, @RequestParam String prepTime,
-                               HttpSession session, Model model){
+                               HttpServletRequest request, Model model){
 
         //Get the userId from the session
-        int currentUserId = (int) session.getAttribute("user");
+        int currentUserId = setUser(request);
 
         //save the recipe to the database
         recipe.setUserId(currentUserId);
@@ -76,11 +81,10 @@ public class RecipeController {
 
     @GetMapping("delete")
     public String displayDeleteRecipeForm(Model model, HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        User sessionUser = authenticationController.getUserFromSession(session);
-        int userId = sessionUser.getId();
-        model.addAttribute("profile", userRepository.findById(userId).get());
-        model.addAttribute("recipesToDelete",recipeRepository.getAllRecipesByUserId(userId));
+        int currentUserId = setUser(request);
+
+        model.addAttribute("profile", userRepository.findById(currentUserId).get());
+        model.addAttribute("recipesToDelete",recipeRepository.getAllRecipesByUserId(currentUserId));
         return "recipes/delete";
     }
     
@@ -91,39 +95,34 @@ public class RecipeController {
             recipeRepository.deleteById(recipe);
         }
 
-        HttpSession session = request.getSession();
-        User sessionUser = authenticationController.getUserFromSession(session);
-        User user = userRepository.findById(sessionUser.getId()).get();
-        int userId = sessionUser.getId();
-        model.addAttribute("user", user);
-        model.addAttribute("profile", userRepository.findById(userId).get());
-        model.addAttribute("userRecipes", recipeRepository.getAllRecipesByUserId(userId));
+        int currentUserId = setUser(request);
+
+        model.addAttribute("user", userRepository.findById(currentUserId).get());
+        model.addAttribute("profile", userRepository.findById(currentUserId).get());
+        model.addAttribute("userRecipes", recipeRepository.getAllRecipesByUserId(currentUserId));
         return "profile";
     }
 
     @GetMapping("edit")
     public String selectRecipeToEdit(Model model, HttpServletRequest request) {
-        HttpSession session = request.getSession();
-        User sessionUser = authenticationController.getUserFromSession(session);
-        int userId = sessionUser.getId();
-        model.addAttribute("profile", userRepository.findById(userId).get());
-        model.addAttribute("recipesToEdit",recipeRepository.getAllRecipesByUserId(userId));
+        int currentUserId = setUser(request);
+
+        model.addAttribute("profile", userRepository.findById(currentUserId).get());
+        model.addAttribute("recipesToEdit",recipeRepository.getAllRecipesByUserId(currentUserId));
         return "recipes/edit";
     }
 
     @PostMapping("edit")
     public String displayEditRecipeForm(@RequestParam int editThis, HttpServletRequest request,
                                         Model model){
-        HttpSession session = request.getSession();
-        User sessionUser = authenticationController.getUserFromSession(session);
-        User user = userRepository.findById(sessionUser.getId()).get();
-        int userId = sessionUser.getId();
+        int currentUserId = setUser(request);
+
         Recipe needToSplit = recipeRepository.findById(editThis);
 
         //split's the string of ingredients to be sent to the edit form
         String[] currentIngredients = needToSplit.getIngredients().split("\\$\\$");
-        model.addAttribute("user", user);
-        model.addAttribute("profile", userRepository.findById(userId).get());
+        model.addAttribute("user", userRepository.findById(currentUserId).get());
+        model.addAttribute("profile", userRepository.findById(currentUserId).get());
         model.addAttribute("editThisRecipe",recipeRepository.findById(editThis));
         model.addAttribute("categories", recipeCategoryRepository.findAll());
         model.addAttribute("currentIngredients",currentIngredients);
@@ -143,11 +142,9 @@ public class RecipeController {
         String temporaryIngredients;
         String finalIngredients;
 
-        HttpSession session = request.getSession();
-        User sessionUser = authenticationController.getUserFromSession(session);
-        User user = userRepository.findById(sessionUser.getId()).get();
-        int userId = sessionUser.getId();
-        model.addAttribute("profile", userRepository.findById(userId).get());
+        int currentUserId = setUser(request);
+
+        model.addAttribute("profile", userRepository.findById(currentUserId).get());
 
 
         int i = Integer.parseInt(oldRecipeId);

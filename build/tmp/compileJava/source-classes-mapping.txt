@@ -22,8 +22,8 @@ org/liftoff/recipebook/AuthenticationFilter.java
  org.liftoff.recipebook.AuthenticationFilter
 org/liftoff/recipebook/controllers/HomeController.java
  org.liftoff.recipebook.controllers.HomeController
-org/liftoff/recipebook/controllers/RecipeController.java
- org.liftoff.recipebook.controllers.RecipeController
+org/liftoff/recipebook/controllers/ViewController.java
+ org.liftoff.recipebook.controllers.ViewController
 org/liftoff/recipebook/controllers/AuthenticationController.java
  org.liftoff.recipebook.controllers.AuthenticationController
 org/liftoff/recipebook/WebApplicationConfig.java
@@ -38,5 +38,5 @@ org/liftoff/recipebook/controllers/RecipeCategoryController.java
  org.liftoff.recipebook.controllers.RecipeCategoryController
 org/liftoff/recipebook/controllers/AddProfilePictureController.java
  org.liftoff.recipebook.controllers.AddProfilePictureController
-org/liftoff/recipebook/controllers/ViewController.java
- org.liftoff.recipebook.controllers.ViewController
+org/liftoff/recipebook/controllers/RecipeController.java
+ org.liftoff.recipebook.controllers.RecipeController

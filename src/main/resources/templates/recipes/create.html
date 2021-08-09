@@ -12,7 +12,8 @@
 
     <div class="form-group">
         <label>Dish Name:<br>
-            <input type="text" name="name" placeholder="Ex: Green Eggs and Ham"/>
+            <input type="text" placeholder="Ex: Green Eggs and Ham">
+<!--            <span th:errors="${recipe.name}" class="error"></span>-->
         </label>
     </div>
 
@@ -26,7 +27,7 @@
 
     <div class="form-group">
         <label>Preparation Instructions:<br>
-            <textarea name="description" rows="3" cols="25" maxlength="1000" placeholder="Recipe steps here"></textarea>
+            <textarea name="description" rows="3" cols="25" placeholder="Recipe steps here"></textarea>
         </label>
     </div>
 
