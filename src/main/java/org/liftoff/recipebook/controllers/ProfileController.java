@@ -1,8 +1,8 @@
 package org.liftoff.recipebook.controllers;
 
 import org.liftoff.recipebook.models.Recipe;
+import org.liftoff.recipebook.models.RecipeCategory;
 import org.liftoff.recipebook.models.User;
-import org.liftoff.recipebook.models.data.RecipeCategoryRepository;
 import org.liftoff.recipebook.models.data.RecipeRepository;
 import org.liftoff.recipebook.models.data.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,4 +58,24 @@ public class ProfileController {
         return "redirect:/profile/{userId}";
     }
 
+    @GetMapping("/add-profile-picture")
+    public String renderAddProfilePictureForm(Model model, HttpServletRequest request){
+        HttpSession session = request.getSession();
+        User sessionUser = authenticationController.getUserFromSession(session);
+        int userId = sessionUser.getId();
+
+        model.addAttribute("recipe", new Recipe());
+        model.addAttribute("profile", userRepository.findById(userId).get());
+        return "profile/add-profile-picture";
+    }
+
+    @PostMapping("/add-profile-picture")
+    public String createCreateCategory(@RequestParam String profilePictureUrl, HttpServletRequest request, Model model, RecipeCategory recipeCategory) {
+        HttpSession session = request.getSession();
+        User sessionUser = authenticationController.getUserFromSession(session);
+        int userId = sessionUser.getId();
+        sessionUser.setProfilePicture(profilePictureUrl);
+        userRepository.save(sessionUser);
+        return "redirect:/profile/" + userId;
+    }
 }

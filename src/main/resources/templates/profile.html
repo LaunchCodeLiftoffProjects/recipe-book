@@ -12,7 +12,7 @@
                 <td>
                     <img th:src="${user.profilePicture}" width="250" onerror="this.src = 'https://www.indianewsstream.com/wp-content/uploads/2019/07/2205256774854474505_medium.jpg';">
                     <br>
-                    <a id="change-profile-picture-link" th:if="${isUserInSession}" th:href="@{/add-profile-picture}">Change Profile Picture</a>
+                    <a id="change-profile-picture-link" th:if="${isUserInSession}" th:href="@{/profile/add-profile-picture}">Change Profile Picture</a>
                     <p id="name" th:text="${user.username}">USERNAME</p>
                     <i><p th:if="${user.bio}" th:text="${user.bio}">BIO</p></i>
                     <div th:if="${isUserInSession}">
