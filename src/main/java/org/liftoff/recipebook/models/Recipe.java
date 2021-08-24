@@ -1,20 +1,23 @@
 package org.liftoff.recipebook.models;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.util.List;
 
 
 @Entity
-public class Recipe extends AbstractEntity{
+public class Recipe{
 
-    private int userId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+
+    @ManyToOne
+    private User user;
 
     @NotBlank(message = "Name required")
-    @Size(max = 50, message = "50 characters or less")
+    @Size(max = 200, message = "200 characters or less")
     private String name;
     private String ingredients;
     private String description;
@@ -38,11 +41,16 @@ public class Recipe extends AbstractEntity{
 
 //    public Recipe(String name){ this.name = name;}
 
-    public int getUserId() {
-        return userId;
+
+    public int getId() {
+        return id;
     }
-    public void setUserId(int userId) {
-        this.userId = userId;
+
+    public User getUser() {
+        return user;
+    }
+    public void setUser(User user) {
+        this.user = user;
     }
 
     public String getName() {

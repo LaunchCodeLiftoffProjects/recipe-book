@@ -45,3 +45,7 @@ span {
     height: 150px;
     padding: 10px;
 }
+
+#welcome {
+    font-family:"Palatino Linotype";
+}

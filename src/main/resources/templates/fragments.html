@@ -39,7 +39,7 @@
         <tr th:each="recipe:${userRecipes}" >
             <td align="center">
                 <img th:src="${recipe.imageUrl}" id="recipe-image" alt="No recipe image"><br>
-                <p id="recipe-name" th:text="${recipe.name}"></p>
+                <a th:href="@{/view}" id="recipe-name" th:text="${recipe.name}"></a>
             </td>
             <td align="center">
                 <ul>

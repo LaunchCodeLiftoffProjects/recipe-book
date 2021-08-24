@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="container body-content">
+<nav th:replace="fragments :: page-header"></nav>
+<form method="post">
+    <h2>Create Category</h2>
+    <div>
+        <input type="text" name="name" placeholder="Enter New Category">
+    </div>
+    <button class="btn btn-primary" type="submit" value="Submit">Add</button>
+</form>
+
+<!--        div th:if="${profile.username} == admin"-->
+<h2>Delete Category</h2>
+<div th:each="existingCategory:${categories}">
+    <input type="checkbox" th:name="deleteCategories" th:value="${existingCategory.id}">
+    <label th:text="${existingCategory.name}"></label>
+    <button class="btn btn-outline-info" type="button" id="delete">Delete</button>
+</div>
+
+</body>
+</html>

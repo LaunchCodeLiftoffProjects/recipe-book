@@ -12,7 +12,7 @@
 
     <div class="form-group">
         <label>Dish Name:<br>
-            <input type="text" placeholder="Ex: Green Eggs and Ham">
+            <input type="text" name="name" placeholder="Ex: Green Eggs and Ham">
 <!--            <span th:errors="${recipe.name}" class="error"></span>-->
         </label>
     </div>
@@ -47,7 +47,7 @@
                 </option>
             </select>
         </label>
-        <a th:href="create-category">Create new category</a>
+        <a th:href="categories">Create new category</a>
     </div>
     <button class="btn btn-primary" type="submit" value="Submit">Submit</button>
 </form>

@@ -34,7 +34,7 @@ public class RecipeCategoryController {
         int userId = sessionUser.getId();
 
         model.addAttribute("profile", userRepository.findById(userId).get());
-        return "create-category";
+        return "/recipes/create-category";
     }
 
     @PostMapping("/create-category")

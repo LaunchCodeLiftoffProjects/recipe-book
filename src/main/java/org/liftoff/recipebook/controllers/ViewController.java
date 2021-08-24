@@ -32,7 +32,7 @@ public class ViewController {
     private UserRepository userRepository;
 
 
-    @RequestMapping(value = "recipe")
+    @RequestMapping
     public String view(Model model, HttpServletRequest request) {
         HttpSession session = request.getSession();
         User sessionUser = authenticationController.getUserFromSession(session);

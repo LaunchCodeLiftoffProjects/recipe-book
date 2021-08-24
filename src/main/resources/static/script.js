@@ -1,12 +1,13 @@
-const button = document.getElementById("add");
+const addButton = document.getElementById("add");
+//const deleteButton = document.getElementById("delete");
 const input = document.getElementById("ingredientInput");
 const label = document.getElementById("ingredientsLabel");
 const hiddenIngredients = document.getElementById("hiddenIngredients");
 const ul =document.createElement("ul");
 
-//This function adds the ingredients to a list to be saved to the recipe
-button.addEventListener("click", function() {
-    // create list and add attributes
+//This function allows users to add ingredients to the recipe
+addButton.addEventListener("click", function() {
+    // create list-item and add attributes
     const li = document.createElement("li");
     ul.classList.add("list-group");
     ul.id = "ingredients-list";
@@ -20,4 +21,9 @@ button.addEventListener("click", function() {
     hiddenIngredients.value += input.value + ", ";
     input.value = "";
 })
+
+////This function allows admins to delete categories
+//deleteButton.addEventListener("click", function() {
+//
+//})
 

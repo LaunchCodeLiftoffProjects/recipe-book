@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -57,9 +59,10 @@ public class RecipeController {
 
         //Get the userId from the session
         int currentUserId = setUser(request);
+        User current = userRepository.findById(currentUserId).get();
 
         //save the recipe to the database
-        recipe.setUserId(currentUserId);
+        recipe.setUser(current);
         recipe.setName(name);
         recipe.setImageUrl(imageUrl);
         recipe.setDescription(description.trim());//added .trim() to get rid of unnecessary white space
@@ -172,9 +175,33 @@ public class RecipeController {
         recipeRepository.save(recipeBeingEdited);
 
 
-        String[] myIngredients = recipeBeingEdited.getIngredients().split("\\$\\$");
+        String[] myIngredients = recipeBeingEdited.getIngredients().split(", ");
         model.addAttribute("myIngredients",myIngredients);
         model.addAttribute("recipe",recipeBeingEdited);
         return "view";
+    }
+
+    @GetMapping("categories")
+    public String displayCreateCategoryForm(Model model, HttpServletRequest request) {
+
+        int currentUserId = setUser(request);
+
+        model.addAttribute("profile", userRepository.findById(currentUserId).get());
+        model.addAttribute("category", new RecipeCategory());
+        model.addAttribute("categories", recipeCategoryRepository.findAll());
+        return "/recipes/categories";
+    }
+
+    @PostMapping("/categories")
+    public String processCreateCategoryForm(@RequestParam String name, Model model, @ModelAttribute @Valid RecipeCategory newRecipeCategory,
+                                       @RequestParam ArrayList<RecipeCategory> deleteCategories) {
+
+        for (RecipeCategory category: deleteCategories) {
+            recipeCategoryRepository.deleteById(category.getId());
+        }
+
+        newRecipeCategory.setName(name);
+        recipeCategoryRepository.save(newRecipeCategory);
+        return "redirect:/recipes/create";
     }
 }
