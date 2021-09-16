@@ -55,6 +55,12 @@ public class ProfileController {
         User sessionUser = authenticationController.getUserFromSession(session);
         sessionUser.setBio(user.getBio());
         userRepository.save(sessionUser);
+
+        for(Recipe recipeIterable: recipeRepository.getAllRecipesByUserId(user.getId())){
+            int recipeId = recipeIterable.getId();
+            model.addAttribute("recipeId", recipeId);
+        }
+
         return "redirect:/profile/{userId}";
     }
 
