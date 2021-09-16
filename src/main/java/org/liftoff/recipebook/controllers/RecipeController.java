@@ -52,10 +52,10 @@ public class RecipeController {
     }
 
     @PostMapping("/create")
-    public String processCreateRecipeForm(@RequestParam String name, @ModelAttribute Recipe recipe, @RequestParam String description,
-                               @RequestParam String hiddenIngredients, @RequestParam RecipeCategory category,
-                               @RequestParam String imageUrl, @RequestParam String prepTime,
-                               HttpServletRequest request, Model model){
+    /*@RequestParam String name, @RequestParam String description,
+                               @RequestParam RecipeCategory category,
+                               @RequestParam String imageUrl, @RequestParam String prepTime,*/
+    public String processCreateRecipeForm( @ModelAttribute Recipe recipe, @RequestParam String hiddenIngredients, HttpServletRequest request, Model model){
 
         //Get the userId from the session
         int currentUserId = setUser(request);
@@ -63,12 +63,12 @@ public class RecipeController {
 
         //save the recipe to the database
         recipe.setUser(current);
-        recipe.setName(name);
+        /*recipe.setName(name);
         recipe.setImageUrl(imageUrl);
         recipe.setDescription(description.trim());//added .trim() to get rid of unnecessary white space
         recipe.setPrepTime(prepTime);
-        recipe.setIngredients(hiddenIngredients);
-        recipe.setCategory(category);
+        */recipe.setIngredients(hiddenIngredients);/*
+        recipe.setCategory(category);*/
         recipeRepository.save(recipe);
         User user = userRepository.findById(currentUserId).get();
         model.addAttribute("profile", userRepository.findById(currentUserId).get());
